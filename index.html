@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script>
+            var result;
+            var compChoice;
+            let player = prompt('Choose your weapon...');
+            var playerChoice = player.toLowerCase();
+            console.log('You\'ve chosen ' + playerChoice)
+            function computerPlay() {
+                compChoice = Math.floor(1 + Math.random() * 3);
+                console.log(compChoice)
+                switch (true) {
+                    case compChoice == 1:
+                        compChoice = 'rock'
+                        break;
+                    case compChoice == 2: 
+                        compChoice = 'paper'
+                        break;
+                    default: 
+                        compChoice = 'scissors'
+                }
+                console.log("Computer has chosen " + compChoice)
+                return compChoice;
+                
+            }
+            
+            function playRound(playerSelection, computerSelection) {
+                computerSelection();
+                if (playerSelection == compChoice) {
+                    result = 'Draw!';
+                } else if ((playerSelection == 'rock' && compChoice == 'scissors') || (playerSelection == 'paper' && compChoice == 'rock') || (playerSelection == 'scissors' && compChoice == 'paper') ) {
+                    result = 'You win!';
+                } else if ((compChoice == 'rock' && playerSelection == 'scissors') || (compChoice == 'paper' && playerSelection == 'rock') || (compChoice == 'scissors' && playerSelection == 'paper') ) {
+                    result = 'You lose...';
+                }
+                return result;
+            }   
+
+            playRound(playerChoice, computerPlay);
+            alert(result);
+
+        </script>
+    </body>
+</html>
