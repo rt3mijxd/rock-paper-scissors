@@ -5,11 +5,19 @@
     </head>
     <body>
         <script>
-            var result;
-            var compChoice;
-            let player = prompt('Choose your weapon...');
-            var playerChoice = player.toLowerCase();
-            console.log('You\'ve chosen ' + playerChoice)
+            let result;
+            let compChoice;
+            let player;
+            let playerChoice;
+            let plScore = 0;
+            let pcScore = 0;
+            function playerMove() {
+                player = prompt('Choose your weapon...');
+                playerChoice = player.toLowerCase();
+                console.log('You\'ve chosen ' + playerChoice)
+                return playerChoice;
+            }
+            
             function computerPlay() {
                 compChoice = Math.floor(1 + Math.random() * 3);
                 console.log(compChoice)
@@ -27,21 +35,43 @@
                 return compChoice;
                 
             }
+
+            
             
             function playRound(playerSelection, computerSelection) {
+                playerSelection();
                 computerSelection();
-                if (playerSelection == compChoice) {
+                if (playerChoice == compChoice) {
                     result = 'Draw!';
-                } else if ((playerSelection == 'rock' && compChoice == 'scissors') || (playerSelection == 'paper' && compChoice == 'rock') || (playerSelection == 'scissors' && compChoice == 'paper') ) {
-                    result = 'You win!';
-                } else if ((compChoice == 'rock' && playerSelection == 'scissors') || (compChoice == 'paper' && playerSelection == 'rock') || (compChoice == 'scissors' && playerSelection == 'paper') ) {
-                    result = 'You lose...';
+                } else if ((playerChoice == 'rock' && compChoice == 'scissors') || (playerChoice == 'paper' && compChoice == 'rock') || (playerChoice == 'scissors' && compChoice == 'paper') ) {
+                    result = 'You win this round!';
+                    plScore += 1;
+                } else if ((compChoice == 'rock' && playerChoice == 'scissors') || (compChoice == 'paper' && playerChoice == 'rock') || (compChoice == 'scissors' && playerChoice == 'paper') ) {
+                    result = 'You lose this round...';
+                    pcScore += 1;
                 }
+                alert(result);
+                console.log(result);
+                
                 return result;
             }   
 
-            playRound(playerChoice, computerPlay);
-            alert(result);
+            function game() {
+                playRound(playerMove, computerPlay);
+                playRound(playerMove, computerPlay);
+                playRound(playerMove, computerPlay);
+                playRound(playerMove, computerPlay);
+                playRound(playerMove, computerPlay);
+                if (plScore > pcScore) {
+                    alert('You win!');
+                    console.log('Computer: ' + pcScore + '; You:' + plScore + '. You win!')
+                } else {
+                    alert('You lose...')
+                    console.log('Computer: ' + pcScore + '; You: ' + plScore + '. You lose...')
+                }
+            }
+            
+            game();
 
         </script>
     </body>
